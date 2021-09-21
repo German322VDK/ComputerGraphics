@@ -77,9 +77,9 @@ namespace Task1
 
             _x1 = _x2 = pictureBox1.Width / 2;
 
-            _y1 = pictureBox1.Height / 2 - 50;
+            _y1 = pictureBox1.Height / 2 - 25;
 
-            _y2 = _y1 + 100;
+            _y2 = _y1 + 75;
 
             g.DrawLine(p, _x1, _y1, _x2, _y2);
 
@@ -136,12 +136,24 @@ namespace Task1
 
             int y = int.Parse(xy[1]);
 
-            //Косяк в _x1,2 _y1,2
-            int X = (int)((_x2 - x) * Math.Cos(ToRad(_angle)) - (_y2 - y) * Math.Sin(ToRad(_angle))) + x;
+            int newX1 = _x2 - x;
+            int newY1 = _y2 - y;
 
-            int Y = (int)((_x2 - x) * Math.Sin(ToRad(_angle)) + (_y2 - y) * Math.Cos(ToRad(_angle))) + y;
+            int newX2 = x - _x1;
+            int newY2 = y - _y1;
 
-            g.DrawLine(p, x, y, X, Y);
+
+            float X1 = (float)(newX1 * Math.Cos(ToRad(_angle)) - newY1 * Math.Sin(ToRad(_angle))) + x;
+
+            float Y1 = (float)(newX1 * Math.Sin(ToRad(_angle)) + newY1 * Math.Cos(ToRad(_angle))) + y;
+
+            float X2 = (float)(newX2 * Math.Cos(ToRad(_angle + 180)) - newY2 * Math.Sin(ToRad(_angle + 180))) + x;
+
+            float Y2 = (float)(newX2 * Math.Sin(ToRad(_angle + 180)) + newY2 * Math.Cos(ToRad(_angle + 180))) + y;
+
+            g.DrawLine(p, x, y, X1, Y1);
+
+            g.DrawLine(p, x, y, X2, Y2);
         }
 
         private double ToRad(double degr) =>
