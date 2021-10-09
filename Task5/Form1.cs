@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,17 +14,21 @@ namespace Task5
     public partial class Form1 : Form
     {
         private Graphics _g;
-        private Pen _p;
+        private Pen[] _p;
         private Rectangle _rectangle;
-        private int _n;
-        private const string label1Text = "Введите количество вершин полигона";
+        private const int _n = 5;
+
+        private Color[] _colors = 
+            { 
+            Color.Black, Color.Red, Color.Green, Color.Blue, Color.DarkKhaki, Color.Orange,
+            Color.Purple, Color.DarkBlue, Color.Chocolate, Color.DarkRed, Color.DarkGreen
+            };
 
         public Form1()
         {
             InitializeComponent();
 
             pictureBox1.BackColor = Color.White;
-            label1.Text = label1Text;
 
         }
 
@@ -31,18 +36,14 @@ namespace Task5
         {
             ClearForm();
 
-            var nResult = int.TryParse(textBox1.Text, out _n);
-
-            if (!nResult || _n < 2)
-            {
-                MessageBox.Show("Не правильное количество вершин", "Ошибка");
-
-                return;
-            }
-
             _g = Graphics.FromHwnd(pictureBox1.Handle);
 
-            _p = new Pen(Color.Red);
+            _p = new Pen[_n];
+
+            for (int i = 0; i < _p.Length; i++)
+            {
+                _p[i] = new Pen(_colors[i]);
+            }
 
             _rectangle = new Rectangle(50, 10, 200, 200);
 
@@ -52,18 +53,22 @@ namespace Task5
             {
                 if (i == points.Length - 1)
                 {
-                    _g.DrawLine(_p, points[i], points[0]);
+                    _g.DrawLine(_p[i], points[i], points[0]);
                 }
                 else
                 {
-                    _g.DrawLine(_p, points[i], points[i + 1]);
+                    _g.DrawLine(_p[i], points[i], points[i + 1]);
                 }
-                
+
+
+
             }
 
             for (int i = 1; i < points.Length; i++)
             {
-                _g.DrawLine(_p, points[0], points[i]);
+                _g.DrawLine(_p[i - 1], points[0], points[i]);
+
+                Thread.Sleep(1000);
             }
         }
 
