@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Task5
@@ -14,63 +8,67 @@ namespace Task5
     public partial class Form1 : Form
     {
         private Graphics _g;
-        private Pen[] _p;
+        private Pen _p;
         private Rectangle _rectangle;
-        private const int _n = 5;
+        private int _n;
+        private const string label1Text = "Введите количество вершин полигона";
 
-        private Color[] _colors = 
-            { 
-            Color.Black, Color.Red, Color.Green, Color.Blue, Color.DarkKhaki, Color.Orange,
-            Color.Purple, Color.DarkBlue, Color.Chocolate, Color.DarkRed, Color.DarkGreen
-            };
+        private Color[] _color = { Color.Black, Color.Red, Color.Blue, Color.Green, Color.Orange, Color.Purple };
+
+        int x = 10, y = 50, s = 200;
 
         public Form1()
         {
             InitializeComponent();
 
             pictureBox1.BackColor = Color.White;
-
+            label1.Text = label1Text;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             ClearForm();
 
-            _g = Graphics.FromHwnd(pictureBox1.Handle);
+            var nResult = int.TryParse(textBox1.Text, out _n);
 
-            _p = new Pen[_n];
-
-            for (int i = 0; i < _p.Length; i++)
+            if (!nResult || _n < 2)
             {
-                _p[i] = new Pen(_colors[i]);
+                MessageBox.Show("Не правильное количество вершин", "Ошибка");
+
+                return;
             }
 
-            _rectangle = new Rectangle(50, 10, 200, 200);
+            _g = Graphics.FromHwnd(pictureBox1.Handle);
+
+            _p = new Pen(Color.Black);
+
+            _rectangle = new Rectangle(x, y, s, s);
 
             var points = MakeRandomPolygon(_n, _rectangle);
 
-            for (int i = 0; i < points.Length; i++)
+            _g.DrawPolygon(_p, points);
+
+
+            PointF Centr = new PointF(s / 2 + x, s / 2 + y);
+
+
+            int i = 0;
+            foreach (var item in points)
             {
-                if (i == points.Length - 1)
+                if (i == _color.Length - 1)
                 {
-                    _g.DrawLine(_p[i], points[i], points[0]);
-                }
-                else
-                {
-                    _g.DrawLine(_p[i], points[i], points[i + 1]);
+                    i = 0;
                 }
 
+                _p = new Pen(_color[i]);
+                _g.DrawLine(_p, item, Centr);
+                i++;
+            }   
 
-
-            }
-
-            for (int i = 1; i < points.Length; i++)
-            {
-                _g.DrawLine(_p[i - 1], points[0], points[i]);
-
-                Thread.Sleep(1000);
-            }
         }
+
+        private void button2_Click(object sender, EventArgs e) =>
+            Close();
 
         public PointF[] MakeRandomPolygon(int num_vertices,
             Rectangle bounds)
@@ -142,8 +140,5 @@ namespace Task5
                 _g.Clear(Color.White);
             }
         }
-
-        private void button2_Click(object sender, EventArgs e) =>
-            Close();
     }
 }

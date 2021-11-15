@@ -39,17 +39,19 @@ namespace Task4
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(56, 48);
+            this.pictureBox1.Location = new System.Drawing.Point(49, 36);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(330, 234);
+            this.pictureBox1.Size = new System.Drawing.Size(323, 255);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(56, 444);
+            this.button1.Location = new System.Drawing.Point(49, 451);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(159, 43);
+            this.button1.Size = new System.Drawing.Size(139, 32);
             this.button1.TabIndex = 1;
             this.button1.Text = "Сгенерировать";
             this.button1.UseVisualStyleBackColor = true;
@@ -57,9 +59,10 @@ namespace Task4
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(279, 444);
+            this.button2.Location = new System.Drawing.Point(278, 451);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 43);
+            this.button2.Size = new System.Drawing.Size(94, 32);
             this.button2.TabIndex = 2;
             this.button2.Text = "Выйти";
             this.button2.UseVisualStyleBackColor = true;
@@ -68,30 +71,32 @@ namespace Task4
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(56, 325);
+            this.label1.Location = new System.Drawing.Point(49, 362);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
+            this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(103, 362);
+            this.textBox1.Location = new System.Drawing.Point(90, 390);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(219, 27);
+            this.textBox1.Size = new System.Drawing.Size(186, 23);
             this.textBox1.TabIndex = 4;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 548);
+            this.ClientSize = new System.Drawing.Size(408, 515);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Task 4";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
